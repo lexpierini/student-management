@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddEntityFrameworkNpgsql()
-    .AddDbContext<AppDbContext>(option => option.UseNpgsql("Host=localhost;Port=5432;Pooling-true;Database=studentManagement;User Id=postgres;Password=dev123"));
+    .AddDbContext<AppDbContext>(option => option.UseNpgsql("Host=localhost;Port=5432;Database=studentManagement;User Id=dev;Password=dev123"));
 
 builder.Services.AddSwaggerGen();
 
