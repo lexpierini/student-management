@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kggGP71ji+TFejheQOUjWv0O1V0PzBX4RtblamGnNilcusBXNcZSQAwj2svK/k0aj0K3mxbEhDvWVhCLCjwB9w==",
+  "dgSpecHash": "neD8MxRRYPHva4F7Y3xORN3gzirG/gatUvb3YCkRdmR67M9o/M9KscbQtHdjkV33SzemeN7NMMVIBl9mxio2QA==",
   "success": true,
   "projectFilePath": "C:\\Users\\alex_\\Programming Projects\\student-management\\StudentManagementApi\\StudentManagementApi.csproj",
   "expectedPackageFiles": [
@@ -22,6 +22,8 @@
     "C:\\Users\\alex_\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\alex_\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "C:\\Users\\alex_\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\alex_\\.nuget\\packages\\npgsql\\6.0.3\\npgsql.6.0.3.nupkg.sha512",
+    "C:\\Users\\alex_\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.3\\npgsql.entityframeworkcore.postgresql.6.0.3.nupkg.sha512",
     "C:\\Users\\alex_\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\alex_\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\alex_\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
