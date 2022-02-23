@@ -34,9 +34,8 @@ namespace StudentManagementApi.Services
         }
 
         public async Task<Student> GetStudentById(int id)
-        {
-            Student student = new Student();
-            student = await _context.Students.FindAsync(id);
+        {            
+            Student student = await _context.Students.FindAsync(id);
             return student;
         }
 
