@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using StudentManagementApi.Context;
+using StudentManagementApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<AppDbContext>(option => option.UseNpgsql("Host=localhost;Port=5432;Database=studentManagement;User Id=dev;Password=dev123"));
+
+builder.Services.AddScoped<IStudentService, StudentService>();
 
 builder.Services.AddSwaggerGen();
 
