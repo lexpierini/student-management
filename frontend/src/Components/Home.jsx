@@ -1,8 +1,10 @@
+import { Typography } from "@mui/material";
+
 function Home() {
     return (
-      <h1>
+      <Typography color='primary'>
           Home
-      </h1>
+      </Typography>
     );
   }
   
