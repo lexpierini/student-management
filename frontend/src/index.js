@@ -5,7 +5,6 @@ import { store } from './store/store';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './themeConfig';
-
 import Home from './Components/Home';
 
 
