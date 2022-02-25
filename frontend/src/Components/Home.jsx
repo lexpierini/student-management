@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+import Content from "./Content";
 import Header from "./Header";
 
 function Home(props) {
@@ -11,8 +12,8 @@ function Home(props) {
       >
         <Header />
       </Grid>
-      <Grid item xs={12}>
-        Body
+      <Grid item xs={12} sx={{ height: "100%" }}>
+        <Content />
       </Grid>
       <Grid item xs={12}>
         Footer

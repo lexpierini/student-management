@@ -24,7 +24,7 @@ function Header(props) {
       </Box>
       <Box sx={{ alignSelf: "center" }}>
         <Typography variant="h4" color="white">
-          STUDENT MANAGEMENT
+          GESTION DES ÉTUDIANTS
         </Typography>
       </Box>
     </Box>
