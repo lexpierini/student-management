@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using StudentManagementApi.Services;
 using StudentManagementApi.ViewModels;
@@ -12,8 +14,8 @@ namespace StudentManagementApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
         private readonly IAuthenticate _authenticate;
+        private readonly IConfiguration _configuration;
 
         public AccountController(IConfiguration configuration, IAuthenticate authenticate)
         {
@@ -64,7 +66,7 @@ namespace StudentManagementApi.Controllers
             var claims = new[]
             {
                 new Claim("email", login.Email),
-                //new Claim("myToken", "token for test"),
+                new Claim("myToken", "token for test"),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
