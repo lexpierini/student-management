@@ -74,7 +74,7 @@ namespace StudentManagementApi.Controllers
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var expiration = DateTime.UtcNow.AddMinutes(20);
+            var expiration = DateTime.UtcNow.AddHours(1);
 
             JwtSecurityToken token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
@@ -85,7 +85,7 @@ namespace StudentManagementApi.Controllers
 
             return new UserTokenVM()
             {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Token = $"Bearer {new JwtSecurityTokenHandler().WriteToken(token)}",
                 Expiration = expiration,
             };
         }
