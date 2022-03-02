@@ -5,13 +5,13 @@ import { store } from './store/store';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './themeConfig';
-import Home from './Components/Home';
+import Login from './Components/Login';
 
 
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <Home />
+      <Login />
     </ThemeProvider>
   </Provider>,
   document.getElementById('root')
