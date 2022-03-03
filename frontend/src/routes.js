@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Components/Login';
-import StudentManagement from './Components/StudentManagement'
+import Home from './Components/Home'
 
 export default function routes() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />} />
-                <Route path='/StudentsManagement' element={<StudentManagement />} />
+                <Route path='/StudentsManagement' element={<Home />} />
             </Routes>
         </BrowserRouter>
     )

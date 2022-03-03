@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import logo from "../assets/logoAlex72dpi.png";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -39,4 +40,4 @@ function Header(props) {
   );
 }
 
-export default Header;
+export default memo(Header);
