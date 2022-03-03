@@ -1,5 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import logo from "../assets/logoAlex72dpi.png";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function Header(props) {
   return (
@@ -22,10 +23,17 @@ function Header(props) {
           }}
         />
       </Box>
-      <Box sx={{ alignSelf: "center" }}>
+      <Box sx={{ alignSelf: "center", flexGrow: 1 }}>
         <Typography variant="h4" color="white">
           GESTION DES ÉTUDIANTS
         </Typography>
+      </Box>
+      <Box sx={{ alignSelf: "center" }}>
+        <Tooltip title="Déconnexion" placement="left">
+          <IconButton sx={{ color: "white" }}>
+            <LogoutIcon />
+          </IconButton>
+        </Tooltip>
       </Box>
     </Box>
   );
