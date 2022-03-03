@@ -3,13 +3,13 @@ import axios from './../services/axiosService';
 
 const initialState = {}
 
-export const studentSlice = createSlice({
-    name: 'student',
+export const loginSlice = createSlice({
+    name: 'login',
     initialState,
     reducers: {},
     extraReducers: {},
 })
 
-export const { } = studentSlice.actions
+export const { } = loginSlice.actions
 
-export default studentSlice.reducer
+export default loginSlice.reducer
