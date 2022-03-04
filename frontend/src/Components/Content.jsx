@@ -1,9 +1,16 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Icon, IconButton } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MUIDataTable from "mui-datatables";
+import { getStudents, selectAllStudents } from "./../store/studentSlice";
 
 function Content(props) {
+  const dispatch = useDispatch();
+
+  const students = useSelector(selectAllStudents);
+
   const tableOptions = {};
 
   const tableTextlabels = {
@@ -34,9 +41,28 @@ function Content(props) {
     },
   };
 
+  useEffect(() => {
+    dispatch(getStudents());
+  }, [dispatch]);
+
   return (
     <Box mx={3} mt={1} mb={3}>
       <MUIDataTable
+        data={students}
+        columns={[
+          {
+            name: "name",
+            label: "Nom",
+          },
+          {
+            name: "email",
+            label: "E-mail",
+          },
+          {
+            name: "age",
+            label: "Âge",
+          },
+        ]}
         options={{
           textLabels: tableTextlabels,
           print: false,

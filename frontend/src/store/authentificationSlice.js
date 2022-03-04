@@ -5,7 +5,7 @@ export const authentifier = createAsyncThunk("Authentication/Login", async (logi
     try {
         const response = await axios.post("/api/Account/Login", loginData);
 
-        localStorage.setItem('email', response.data.loginData.email);
+        localStorage.setItem('email', loginData.email);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('expiration', response.data.expiration);
 
