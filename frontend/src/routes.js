@@ -7,7 +7,7 @@ export default function routes() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Login />} />
-                <Route path='/StudentsManagement' element={<Home />} />
+                <Route path='/Home' element={<Home />} />
             </Routes>
         </BrowserRouter>
     )

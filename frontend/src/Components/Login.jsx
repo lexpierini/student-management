@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -12,9 +14,31 @@ import EmailIcon from "@mui/icons-material/Email";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import LockIcon from "@mui/icons-material/Lock";
 import FaceIcon from "@mui/icons-material/Face";
+import { authentifier } from "../store/authentificationSlice";
 
 function Login(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [signUpForm, setSignUpForm] = useState(false);
+
+  function handleInputChange(event) {
+    setLogin({ ...login, [event.target.name]: event.target.value });
+  }
+
+  function handleLogin() {
+    dispatch(authentifier(login)).then((resp) => {
+      console.log(resp);
+      if (resp.meta.requestStatus === "fullfilled") {
+        navigate("/home");
+      }
+    });
+  }
 
   return (
     <Box
@@ -62,6 +86,8 @@ function Login(props) {
                     color="secondary"
                     label="E-mail"
                     name="email"
+                    value={login.email}
+                    onChange={handleInputChange}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -86,6 +112,8 @@ function Login(props) {
                     color="secondary"
                     label="Mot de passe"
                     name="password"
+                    value={login.password}
+                    onChange={handleInputChange}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -111,6 +139,8 @@ function Login(props) {
                       color="secondary"
                       label="Confirmer le mot de passe"
                       name="confirmPassword"
+                      value={login.confirmPassword}
+                      onChange={handleInputChange}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -150,7 +180,11 @@ function Login(props) {
                     >
                       S'inscrire
                     </Button>
-                    <Button variant="contained" color="secondary">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={handleLogin}
+                    >
                       Login
                     </Button>
                   </>
