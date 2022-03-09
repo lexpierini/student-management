@@ -33,8 +33,7 @@ function Login(props) {
 
   function handleLogin() {
     dispatch(authentifier(login)).then((resp) => {
-      console.log(resp);
-      if (resp.meta.requestStatus === "fullfilled") {
+      if (resp.meta.requestStatus === "fulfilled") {
         navigate("/home");
       }
     });

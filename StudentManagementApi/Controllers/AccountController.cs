@@ -55,7 +55,7 @@ namespace StudentManagementApi.Controllers
             }
             else
             {
-                ModelState.AddModelError("Login", "Invalid login");
+                ModelState.AddModelError("ErrorMsg", "Invalid login");
                 return BadRequest(ModelState);
             }
         }
@@ -84,7 +84,8 @@ namespace StudentManagementApi.Controllers
 
             return new UserTokenVM()
             {
-                Token = $"Bearer {new JwtSecurityTokenHandler().WriteToken(token)}",
+                //Token = $"Bearer {new JwtSecurityTokenHandler().WriteToken(token)}",
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration,
             };
         }
