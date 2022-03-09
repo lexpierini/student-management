@@ -1,9 +1,21 @@
 import { Box, Grid } from "@mui/material";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getToken } from "../services/axiosService";
 import Content from "./Content";
 import Footer from "./Footer";
 import Header from "./Header";
 
 function Home(props) {
+  const navigate = useNavigate();
+  const token = getToken();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+  }, [navigate, token]);
+
   return (
     <Box sx={{ bgcolor: "background.default", height: "100vh" }}>
       <Grid container spacing={2}>

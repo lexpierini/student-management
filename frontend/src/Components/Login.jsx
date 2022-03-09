@@ -40,7 +40,6 @@ function Login(props) {
       if (resp.meta.requestStatus === "fulfilled") {
         navigate("/home");
       } else {
-        console.log(resp);
         if (resp.payload.ErrorMsg) {
           setMsg({ text: resp.payload.ErrorMsg[0], type: "error" });
         } else if (resp.payload.errors) {

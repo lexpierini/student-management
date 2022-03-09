@@ -5,6 +5,7 @@ export const authentifier = createAsyncThunk("Authentication/Login", async (logi
     try {
         const response = await axios.post("/api/Account/Login", loginData);
 
+        axios.defaults.headers = { Authorization: `Bearer ${response.data.token}` }
         localStorage.setItem('email', loginData.email);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('expiration', response.data.expiration);
