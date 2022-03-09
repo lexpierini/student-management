@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
+  Alert,
   Box,
   Button,
   Grid,
   InputAdornment,
   Paper,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -26,6 +28,8 @@ function Login(props) {
     confirmPassword: "",
   });
   const [signUpForm, setSignUpForm] = useState(false);
+  const [msg, setMsg] = useState({ text: "", type: "" }); //Type: error || warning || info || success
+  const [openMsg, setOpenMsg] = useState(false);
 
   function handleInputChange(event) {
     setLogin({ ...login, [event.target.name]: event.target.value });
@@ -35,9 +39,32 @@ function Login(props) {
     dispatch(authentifier(login)).then((resp) => {
       if (resp.meta.requestStatus === "fulfilled") {
         navigate("/home");
+      } else {
+        console.log(resp);
+        if (resp.payload.ErrorMsg) {
+          setMsg({ text: resp.payload.ErrorMsg[0], type: "error" });
+        } else if (resp.payload.errors) {
+          let text = "";
+
+          for (const [key, value] of Object.entries(resp.payload.errors)) {
+            text += `${value.join(". ")}. `;
+          }
+
+          setMsg({ text: text, type: "error" });
+        }
+        setOpenMsg(true);
       }
     });
   }
+
+  const handleCloseMsg = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenMsg(false);
+    setMsg({ text: "", type: "" });
+  };
 
   return (
     <Box
@@ -193,6 +220,16 @@ function Login(props) {
           </Box>
         </Grid>
       </Grid>
+      <Snackbar
+        open={openMsg}
+        autoHideDuration={8000}
+        onClose={handleCloseMsg}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={handleCloseMsg} severity={msg.type}>
+          {msg.text}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
