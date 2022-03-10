@@ -13,4 +13,10 @@ export function setToken(token) {
     localStorage.setItem('token', token);
 }
 
+export function clearToken() {
+    delete axiosService.defaults.headers;
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+}
+
 export default axiosService;

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from '../services/axiosService';
+import axios, { clearToken } from '../services/axiosService';
 import { setToken } from '../services/axiosService';
 
 export const authentifier = createAsyncThunk("Authentication/Login", async (loginData, thunkAPI) => {
@@ -33,6 +33,7 @@ export const authentificationSlice = createSlice({
     extraReducers: {
         [authentifier.fulfilled]: (state, action) => {
             state.userIsLogged = true
+            clearToken();
         }
     },
 })
