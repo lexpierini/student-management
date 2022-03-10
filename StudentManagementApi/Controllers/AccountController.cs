@@ -27,7 +27,7 @@ namespace StudentManagementApi.Controllers
         {
             if (register.Password != register.ConfirmPassword)
             {
-                ModelState.AddModelError("ConfirmePassword", "Passwords do not match");
+                ModelState.AddModelError("ErrorMsg", "Passwords do not match");
                 return BadRequest(ModelState);
             }
 
@@ -39,7 +39,7 @@ namespace StudentManagementApi.Controllers
             }
             else
             {
-                ModelState.AddModelError("CreateUser", "Invalid register");
+                ModelState.AddModelError("ErrorMsg", "Invalid register");
                 return BadRequest(ModelState);
             }
         }

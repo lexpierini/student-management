@@ -38,21 +38,23 @@ function Login(props) {
   function handleLogin() {
     dispatch(authentifier(login)).then((resp) => {
       if (resp.meta.requestStatus === "fulfilled") {
+        setMsg({ text: "Login Successful", type: "success" });
         navigate("/home");
-      } else {
-        if (resp.payload.ErrorMsg) {
-          setMsg({ text: resp.payload.ErrorMsg[0], type: "error" });
-        } else if (resp.payload.errors) {
-          let text = "";
+      } else if (resp.meta.requestStatus === "rejected") {
+        let errorMsg = "";
 
+        if (resp.payload.errors) {
           for (const [key, value] of Object.entries(resp.payload.errors)) {
-            text += `${value.join(". ")}. `;
+            errorMsg += `${value.join(". ")}. `;
           }
-
-          setMsg({ text: text, type: "error" });
         }
-        setOpenMsg(true);
+        if (resp.payload.ErrorMsg) {
+          errorMsg += `${resp.payload.ErrorMsg.join(". ")}. `;
+        }
+
+        setMsg({ text: errorMsg, type: "error" });
       }
+      setOpenMsg(true);
     });
   }
 
