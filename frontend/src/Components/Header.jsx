@@ -3,14 +3,17 @@ import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import logo from "../assets/logoAlex72dpi.png";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/authentificationSlice";
 
 function Header(props) {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
-  function logout() {
-    localStorage.clear();
-    navigate("/");
-  }
+  // function handleLogout() {
+  //   localStorage.clear();
+  //   navigate("/");
+  // }
 
   return (
     <Box display="flex" my={0.5} mx={2}>
@@ -39,7 +42,10 @@ function Header(props) {
       </Box>
       <Box sx={{ alignSelf: "center" }}>
         <Tooltip title="Déconnexion" placement="left">
-          <IconButton sx={{ color: "white" }} onClick={logout}>
+          <IconButton
+            sx={{ color: "white" }}
+            onClick={() => dispatch(logout())}
+          >
             <LogoutIcon />
           </IconButton>
         </Tooltip>

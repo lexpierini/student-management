@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -22,6 +22,10 @@ function Login(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const userIsLogged = useSelector(
+    (store) => store.authentification.userIsLogged
+  );
+
   const [login, setLogin] = useState({
     email: "",
     password: "",
@@ -38,8 +42,6 @@ function Login(props) {
   function handleLogin() {
     dispatch(authentifier(login)).then((resp) => {
       if (resp.meta.requestStatus === "fulfilled") {
-        setMsg({ text: "Login Successful", type: "success" });
-        navigate("/home");
       } else if (resp.meta.requestStatus === "rejected") {
         let errorMsg = "";
 
@@ -58,14 +60,20 @@ function Login(props) {
     });
   }
 
-  const handleCloseMsg = (event, reason) => {
+  function handleCloseMsg(event, reason) {
     if (reason === "clickaway") {
       return;
     }
 
     setOpenMsg(false);
     setMsg({ text: "", type: "" });
-  };
+  }
+
+  useEffect(() => {
+    if (userIsLogged) {
+      navigate("/home");
+    }
+  }, [userIsLogged, navigate]);
 
   return (
     <Box

@@ -1,20 +1,22 @@
-import { Box, Grid } from "@mui/material";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getToken } from "../services/axiosService";
+import { Box, Grid } from "@mui/material";
 import Content from "./Content";
 import Footer from "./Footer";
 import Header from "./Header";
 
 function Home(props) {
   const navigate = useNavigate();
-  const token = getToken();
+  const userIsLogged = useSelector(
+    (store) => store.authentification.userIsLogged
+  );
 
   useEffect(() => {
-    if (!token) {
+    if (!userIsLogged) {
       navigate("/");
     }
-  }, [navigate, token]);
+  }, [userIsLogged, navigate]);
 
   return (
     <Box sx={{ bgcolor: "background.default", height: "100vh" }}>
