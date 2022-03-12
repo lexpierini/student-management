@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, IconButton } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MUIDataTable from "mui-datatables";
 import { getStudents, selectAllStudents } from "./../store/studentSlice";
@@ -9,7 +10,11 @@ import { getStudents, selectAllStudents } from "./../store/studentSlice";
 function Content(props) {
   const dispatch = useDispatch();
 
+  const studentObj = { id: 0, name: "", email: "", age: 0 };
+
   const students = useSelector(selectAllStudents);
+  const [rowSeleted, setRowSelected] = useState([]); // dataIdex
+  const [student, setStudent] = useState(studentObj);
 
   const tableOptions = {};
 
@@ -70,13 +75,24 @@ function Content(props) {
           selectToolbarPlacement: "none",
           selectableRowsHideCheckboxes: true,
           selectableRowsOnClick: true,
+          selectableRows: "single",
           setTableProps: () => ({ size: "small" }),
+          onRowSelectionChange: (
+            currentRowsSelected,
+            allRowsSelected,
+            rowsSelected
+          ) => {
+            setRowSelected(rowsSelected);
+          },
           customToolbar: () => (
             <Box display="inline">
               <IconButton>
                 <AddCircleIcon />
               </IconButton>
-              <IconButton>
+              <IconButton disabled={rowSeleted.length === 0}>
+                <EditIcon />
+              </IconButton>
+              <IconButton disabled={rowSeleted.length === 0}>
                 <DeleteIcon />
               </IconButton>
             </Box>

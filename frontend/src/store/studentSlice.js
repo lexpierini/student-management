@@ -8,6 +8,16 @@ export const getStudents = createAsyncThunk("Student/Get", async () => {
     return response.data;
 });
 
+export const addStudent = createAsyncThunk("Student/Add", async (student, thunkAPI) => {
+    try {
+        const response = await axios.put("/api/Students/CreateStudent", student);
+        return response.data;
+
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+});
+
 export const {
     selectAll: selectAllStudents,
     selectById: selectStudentById,

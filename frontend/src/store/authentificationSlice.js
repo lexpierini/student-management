@@ -8,6 +8,7 @@ export const authentifier = createAsyncThunk("Authentication/Login", async (logi
 
         setToken(response.data.token)
         localStorage.setItem('email', loginData.email);
+        localStorage.setItem('token', response.data.token);
         localStorage.setItem('expiration', response.data.expiration);
 
         return response.data;
@@ -28,12 +29,12 @@ export const authentificationSlice = createSlice({
         logout(state, action) {
             state.userIsLogged = false;
             localStorage.clear();
+            clearToken();
         }
     },
     extraReducers: {
         [authentifier.fulfilled]: (state, action) => {
             state.userIsLogged = true
-            clearToken();
         }
     },
 })
