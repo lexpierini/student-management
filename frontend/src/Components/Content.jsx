@@ -22,8 +22,6 @@ function Content(props) {
   const [student, setStudent] = useState(studentObj);
   const [openDialog, setOpenDialog] = useState(false);
 
-  const tableOptions = {};
-
   const tableTextlabels = {
     body: {
       noMatch: "Désolé, aucune donnée correspondante à afficher.",
