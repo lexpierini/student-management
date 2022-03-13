@@ -52,6 +52,14 @@ function Content(props) {
     dispatch(getStudents());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (rowSeleted.length === 0) {
+      setStudent(studentObj);
+    } else {
+      setStudent(students[rowSeleted[0]]);
+    }
+  }, [rowSeleted]);
+
   return (
     <Box mx={3} mt={1} mb={3}>
       <MUIDataTable
@@ -79,6 +87,7 @@ function Content(props) {
           selectableRowsOnClick: true,
           selectableRows: "single",
           setTableProps: () => ({ size: "small" }),
+          rowsSelected: rowSeleted,
           onRowSelectionChange: (
             currentRowsSelected,
             allRowsSelected,
@@ -90,13 +99,18 @@ function Content(props) {
             <Box display="inline">
               <IconButton
                 onClick={() => {
-                  setStudent(studentObj);
+                  setRowSelected([]);
                   setOpenDialog(true);
                 }}
               >
                 <AddCircleIcon />
               </IconButton>
-              <IconButton disabled={rowSeleted.length === 0}>
+              <IconButton
+                disabled={rowSeleted.length === 0}
+                onClick={() => {
+                  setOpenDialog(true);
+                }}
+              >
                 <EditIcon />
               </IconButton>
               <IconButton disabled={rowSeleted.length === 0}>

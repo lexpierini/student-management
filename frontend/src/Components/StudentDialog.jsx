@@ -9,7 +9,7 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { addStudent } from "../store/studentSlice";
+import { addStudent, updateStudent } from "../store/studentSlice";
 
 function StudentDialog({ open, onClose, student }) {
   const dispatch = useDispatch();
@@ -29,8 +29,10 @@ function StudentDialog({ open, onClose, student }) {
   function handleSave() {
     if (newStudent.id === 0) {
       dispatch(addStudent(newStudent));
-      handleOnClose();
+    } else {
+      dispatch(updateStudent(newStudent));
     }
+    handleOnClose();
   }
 
   const saveOk = useCallback(() => {
@@ -42,6 +44,10 @@ function StudentDialog({ open, onClose, student }) {
 
     return true;
   }, [newStudent.age, newStudent.email, newStudent.name]);
+
+  useEffect(() => {
+    setNewStudent(student);
+  }, [student]);
 
   useEffect(() => {
     setSaveEnable(saveOk());
