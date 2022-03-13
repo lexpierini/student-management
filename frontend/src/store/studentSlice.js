@@ -30,6 +30,17 @@ export const updateStudent = createAsyncThunk("Student/Update", async (student, 
     }
 });
 
+export const deleteStudent = createAsyncThunk("Student/Delete", async (student, thunkAPI) => {
+    try {
+        const response = await axios.delete("/api/Students/DeleteStudent", { data: student });
+        thunkAPI.dispatch(removeOneStudent(student.id));
+        return response.data;
+
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+});
+
 export const {
     selectAll: selectAllStudents,
     selectById: selectStudentById,
@@ -46,6 +57,9 @@ export const studentSlice = createSlice({
         upsertOneStudent(state, action) {
             studentsAdapter.upsertOne(state.students, action.payload)
         },
+        removeOneStudent(state, action) {
+            studentsAdapter.removeOne(state.students, action.payload)
+        },
     },
     extraReducers: {
         [getStudents.fulfilled]: (state, action) => {
@@ -54,6 +68,6 @@ export const studentSlice = createSlice({
     },
 })
 
-export const { upsertOneStudent } = studentSlice.actions
+export const { upsertOneStudent, removeOneStudent } = studentSlice.actions
 
 export default studentSlice.reducer

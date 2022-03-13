@@ -5,7 +5,11 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MUIDataTable from "mui-datatables";
-import { getStudents, selectAllStudents } from "./../store/studentSlice";
+import {
+  deleteStudent,
+  getStudents,
+  selectAllStudents,
+} from "./../store/studentSlice";
 import StudentDialog from "./StudentDialog";
 
 function Content(props) {
@@ -47,6 +51,11 @@ function Content(props) {
       displayRows: "sur",
     },
   };
+
+  function handleDelete() {
+    dispatch(deleteStudent(student));
+    setRowSelected([]);
+  }
 
   useEffect(() => {
     dispatch(getStudents());
@@ -113,7 +122,10 @@ function Content(props) {
               >
                 <EditIcon />
               </IconButton>
-              <IconButton disabled={rowSeleted.length === 0}>
+              <IconButton
+                disabled={rowSeleted.length === 0}
+                onClick={handleDelete}
+              >
                 <DeleteIcon />
               </IconButton>
             </Box>
