@@ -10,7 +10,9 @@ export const getStudents = createAsyncThunk("Student/Get", async () => {
 
 export const addStudent = createAsyncThunk("Student/Add", async (student, thunkAPI) => {
     try {
-        const response = await axios.put("/api/Students/CreateStudent", student);
+        const response = await axios.post("/api/Students/CreateStudent", student);
+        thunkAPI.dispatch(addOneStudent(response.data));
+
         return response.data;
 
     } catch (error) {
@@ -30,7 +32,11 @@ const initialState = {
 export const studentSlice = createSlice({
     name: 'student',
     initialState,
-    reducers: {},
+    reducers: {
+        addOneStudent(state, action) {
+            studentsAdapter.addOne(state.students, action.payload);
+        }
+    },
     extraReducers: {
         [getStudents.fulfilled]: (state, action) => {
             studentsAdapter.setAll(state.students, action.payload);
@@ -38,6 +44,6 @@ export const studentSlice = createSlice({
     },
 })
 
-export const { } = studentSlice.actions
+export const { addOneStudent } = studentSlice.actions
 
 export default studentSlice.reducer

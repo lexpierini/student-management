@@ -6,6 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MUIDataTable from "mui-datatables";
 import { getStudents, selectAllStudents } from "./../store/studentSlice";
+import StudentDialog from "./StudentDialog";
 
 function Content(props) {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Content(props) {
   const students = useSelector(selectAllStudents);
   const [rowSeleted, setRowSelected] = useState([]); // dataIdex
   const [student, setStudent] = useState(studentObj);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const tableOptions = {};
 
@@ -86,7 +88,12 @@ function Content(props) {
           },
           customToolbar: () => (
             <Box display="inline">
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  setStudent(studentObj);
+                  setOpenDialog(true);
+                }}
+              >
                 <AddCircleIcon />
               </IconButton>
               <IconButton disabled={rowSeleted.length === 0}>
@@ -98,6 +105,12 @@ function Content(props) {
             </Box>
           ),
         }}
+      />
+
+      <StudentDialog
+        open={openDialog}
+        onClose={() => setOpenDialog(!openDialog)}
+        student={student}
       />
     </Box>
   );
